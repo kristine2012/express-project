@@ -76,6 +76,19 @@ app.get('/carOwners/ownscar=:owns_car',(req,res)=>{
 });
 
 
+app.get('/cars/make=:make&model=:model',(req,res)=>{
+  const makeParam = req.params.make;
+  const modelParam = req.params.model; //retrieves the parameter value requested by the user
+  // if ((modelParam === 'male') || (genderParam === 'female')){
+    let filteredArray = [];//array to push the matching objects to user's value
+    for (let i = 0; i < cars.length; i++) {
+      if ((modelParam.toLowerCase() === cars[i].car_model.toLowerCase()) && (makeParam.toLowerCase() === cars[i].car_make.toLowerCase())){
+        filteredArray.push(cars[i]);
+      }
+    }
+    res.send(filteredArray);
+});
+
 app.get('/carOwners/fname=:first_name&ownscar=:owns_car',(req,res)=>{
   const nameParam = req.params.first_name;
   const carParam = req.params.owns_car; //retrieves the parameter value requested by the user
